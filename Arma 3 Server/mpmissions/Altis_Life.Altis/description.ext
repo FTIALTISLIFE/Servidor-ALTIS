@@ -1,0 +1,321 @@
+author = "Tonic | Editado por Kovauviske e AbsolutZ";
+onLoadName = "F.T.I ALTIS LIFE BRASIL";
+onLoadMission = "F.T.I ALTIS LIFE BRASIL - teamspeak.ftialtislife.com.br";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 5;
+disabledAI = true;
+disableChannels[]={0,1,2};
+enableDebugConsole = 1;
+respawnDialog = 0;
+loadScreen = "logo.jpg";
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 120;
+};
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 30;
+corpseRemovalMinTime = 999;
+corpseRemovalMaxTime = 9999;
+
+#include "dialog\MasterHandler.h"
+
+class RscTitles
+{
+	#include "dialog\ui.hpp"
+	#include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.h"
+	#include "dialog\statusBar.hpp"
+	#include "AS_AdminMenu\spectating.hpp"
+
+	class wm_disp {
+		idd = -1;
+		onLoad = "uiNamespace setVariable ['wm_disp', _this select 0]";
+		fadein = 0;
+		fadeout = 0;
+		duration = 10e10;
+		controlsBackground[] = {};
+		objects[] = {};
+		class controls {
+			class wm_text2 {
+				idc = 1;
+				x = safeZoneX+0.027;//safeZoneW*0.01;
+				y = safeZoneY+safeZoneH-0.16;
+				w = 0.35*safeZoneH;
+				h = 0.057*safeZoneH;
+				shadow = 2;
+				class Attributes
+				{
+					font = "EtelkaNarrowMediumPro";
+					color = "#24FFFFFF";
+					align = "left"; // put "center" here if you want some background
+					valign = "middle";
+					shadow = 2;
+				};
+				colorBackground[] = { 1, 0.3, 0, 0 };  // uncomment and increase 4th number to have a background
+				font = "EtelkaNarrowMediumPro";
+				size = 0.06*safeZoneH;
+				type = 13;
+				style = 0;
+				text="";
+			};
+		};
+	};
+};
+
+class CfgFunctions
+{
+	#include "Functions.h"
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"\sounds\Siren_Long.ogg", 1.2, 1};
+		titles[] = {};
+	};
+
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"\sounds\flashbang.ogg", 0.75, 1};
+		titles[] = {};
+	};
+	class bipbip_camion
+	{
+		name = "bipbip_camion";
+		sound[] = {"\sounds\bipbip.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class car_lock
+    {
+        name = "car_lock";
+		sound[] = {"\sounds\car_locked_bleep.ogg", 0.45, 1};
+		titles[] = {};
+	};
+	class car_unlock
+    {
+        name = "car_unlock";
+		sound[] = {"\sounds\car_unlocked.ogg", 0.45, 1};
+		titles[] = {};
+	};
+	class cuff
+	{
+		name = "cuff";
+		sound[] = {"\sounds\cuff.ogg", 0.95, 0.95};
+		titles[] = {};
+	};
+	class empwarn
+	{
+		name = "empwarn";
+		sound[] = {"\sounds\empwarn.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class empacsound
+	{
+		name = "empacsound";
+		sound[] = {"sounds\empac.ogg", db-5, 1};
+		titles[] = {};
+	};
+
+	class Intro
+    {
+        name = "Intro";
+		sound[] = {"\sounds\Intro.ogg", 0.30, 1};
+		titles[] = {};
+	};
+
+	class Intro2
+    {
+        name = "Intro2";
+		sound[] = {"\sounds\Intro2.ogg", 0.30, 1};
+		titles[] = {};
+	};
+
+	class Intro3
+    {
+        name = "Intro3";
+		sound[] = {"\sounds\Intro3.ogg", 0.30, 1};
+		titles[] = {};
+	};
+
+	class Intro4
+    {
+        name = "Intro4";
+		sound[] = {"\sounds\Intro4.ogg", 0.30, 1};
+		titles[] = {};
+	};
+
+	class knockout
+	{
+		name = "knockout";
+		sound[] = {"sounds\knockout.ogg", 1.0, 1};
+		titles[] = {};
+	};
+  	class MedicSirenLong
+	{
+		name = "MedicSirenLong";
+		sound[] = {"sounds\MedicSirenLong.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class speech
+	{
+		name = "speech";
+		sound[] = {"sounds\speech.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class spraycan
+	{
+		name = "spraycan";
+		sound[] = {"sounds\spraycan.ogg", db-20, 1};
+		titles[] = {};
+	};
+	class alert
+	{
+		name= "alert";
+		sound[] = {"sounds\alert.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class mari
+	{
+		name= "mari";
+		sound[] = {"sounds\mari.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class PhotoSound
+	{
+		name = "PhotoSound";
+		sound[] = {"\sounds\camera_shot.ogg",0.5011872,1.0};
+		titles[] = {};
+	};
+	class caralarm
+	{
+		name = "car_alarm";
+        sound[] = {"\sounds\Sound_Car_alarm.ogg", 1.0, 1};
+	    titles[] = {};
+   };
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Missão Fracassada";
+		subtitle = "Você foi suspenso das suas funções";
+		description = "Você não tem permissão para usar esse slot porque você não tem as permissões apropriadas, tente outro slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Blacklisted
+	{
+		title = "Missão Fracassada";
+		subtitle = "Você está na lista negra da polícia";
+		description = "Você não tem permissão para ser um policial devido a ações anteriores e os admins ter removido-lo de ser um policial.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class SpyGlass
+	{
+		title = "SpyGlass te viu";
+		subTitle = "Você foi detectado pelo SpyGlass";
+		description = "Você foi detectado por engano e foi relatado para o servidor. Aproveite seu dia.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "Chamar Samu";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Trabalho de Entrega Aceito";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Trabalho de Entrega Falhou";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Trabalho de entrega concluido";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Nova mensagem de texto";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class PoliceDispatch
+	{
+		title = "Chamar Policia";
+		iconPicture = "icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminDispatch
+	{
+		title = "ADM Central de Notícias";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Mensagem do Administrador";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};
