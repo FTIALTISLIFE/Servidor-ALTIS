@@ -177,6 +177,7 @@ maxping 250
 systime
 uptime
 fortune
+exit
 
    
    

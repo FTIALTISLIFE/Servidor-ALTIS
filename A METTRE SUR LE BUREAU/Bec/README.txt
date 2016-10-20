@@ -2,7 +2,7 @@
 
 Options:
   -h, --help   show this help message and exit
-  -f FILENAME  Config file to read from ( REQUIRED )
+  -f FILENAME  Config file to read from
   -v           Show current Bec version and exit
   --dec        Disable external commands
   --dsc        Disable server check
@@ -30,7 +30,7 @@ Note. your reporter account will be disabled if you use this option.
 --enc switch allows you to set another char table. Bec uses by default 65001. 
 you can use the command chcp in a console to see current char table. 
 
-NOTE: Bec might need admin permission to work properly. but when using the --dsc switch it should not require it.
+NOTE: Bec might need admin permission to work properly. but when using the --dsc switch it should not be required.
 
 -------------------------------------------------------------------------------------------------
 Are you Upgrading from a previous version ???. 
@@ -38,6 +38,7 @@ Make sure you read the changelog.txt and check out the example files for possibl
 
 Do not email me for bug and such if you are to lazy reading the information given to you.
 i'll ignore all emails when it's your own fault you cant get it started.
+
 -------------------------------------------------------------------------------------------------
 
 ************** Now... What is Bec and Whats does it do!. **************
@@ -108,6 +109,9 @@ Http://forums.bistudio.com for more info about that.
 If you are unsure about what this file is. Do read the wiki about it. its Needed for Bec to function.
 
 --- !!! YOU MUST HAVE BATTLEYE SETUP CORRECTLY WITH RCON BEFORE YOU CONTINUE !!! ---
+--- !!! YOU MUST HAVE BATTLEYE SETUP CORRECTLY WITH RCON BEFORE YOU CONTINUE !!! ---
+--- !!! YOU MUST HAVE BATTLEYE SETUP CORRECTLY WITH RCON BEFORE YOU CONTINUE !!! ---
+--- !!! YOU MUST HAVE BATTLEYE SETUP CORRECTLY WITH RCON BEFORE YOU CONTINUE !!! ---
 
 
 -------------
@@ -118,7 +122,7 @@ Place the Bec directory anywhere you want. it doesn’t really matter where its 
 it might be anything like:
 C:\Tools\Bec
 
-Open the "Bec\Config" directory and edit the files called.
+Open the "C:\Tools\Config" directory and edit the files called.
 * Config_EXAMPLE.cfg
 * Admins_EXAMPLE.xml 
 * Commands_EXAMPLE.xml
@@ -136,6 +140,7 @@ Commands	= Commands.xml
 
 # Optional
 [Misc]
+AutoLoadBans			= True
 Ban						= 3
 BeCustomBanFiles 		= Bans1.txt, file2.txt, file3.txt
 ConsoleHeight			= 65
@@ -228,8 +233,12 @@ Target| "c:\..\..\Bec\Bec.exe" -f MyConfig.cfg
 Or set up Bec as a service. 
 
 
-Some explanation of the parameters used by Bec.
 
+
+
+
+
+Some explanation of the parameters used by Bec.
 
 ------------------------------------------------------------------------------------
 * BEC *
@@ -295,6 +304,9 @@ For more information on how to create a command file, Visit:
 Http://ibattle.org/install-and-configure/define-commands/
 
 
+
+
+
 ------------------------------------------------------------------------------------
 * MISC 
 ------------------------------------------------------------------------------------
@@ -302,7 +314,14 @@ This Block is optional with 1 exception.
 In cases where you have renamed your exe file and need to use ServerExeName = MyNewArmaExeName.exe
 
 -------------------
-* Ban *
+* AutoLoadBans = *
+This parameter defines if you want to automatically run loadbans when ban file(s) changes.
+If this parameter is not defined it will be set to off by default.
+Use either (False | 0) or (True | 1) as its argument.
+
+
+-------------------
+* Ban = *
 This parameter will define if you will ban people for GameHack, BattlEye Hack, Both or No banning at all
 You need to specify the value in range 0 til 3
 
@@ -318,11 +337,13 @@ This means, if you have set it to value 1. people caught for battleye hacks will
 If the parameter is not define. Bec will use value 3 as default.
 
 -------------------
-* BeCustomBanFiles *
+* BeCustomBanFiles = *
 
 Set the names of your custom ban files, Separate each file with "," (comma): file1.txt, banfile2.txt, newfile.txt
 If you do not use any custom ban files. delete this option or leave this option commented.
 This option will check ban files for changes and automatic do a (loadbans file) when a file gets changed
+
+Note: when using this you might also want to use the AutoLoadBans option.
 
 -------------------
 * AsciiNickOnly = *
@@ -539,29 +560,18 @@ Files will only be created if there is chat in the channels.
 If enabled. it will only allow N normal players to join.
 
 Example: 
-
-Max server.. 90 players
-(players:90) > slotlimit:54 
-90 > slotlimit:54 ...meaning that it kick players above player count.. 80 
-------
-44players..
-44 > 54 ... nop
-------
-55players:
-55 > 54 ... nop
-------
-81players
-81 > 54 ... yes check...
------------------------------------
 Using slotlimit 45 on max 90 pl server
-90 players
-90 > 45 ... yes check
+-90 players-
+90 > 45 ... yes check / kick
 ------
-75players
-75 > 45 ... yes check
+-75 players-
+75 > 45 ... yes check / kick
 ------
-42players
-42 > 45 ... nop
+-42 players-
+42 > 45 ... no kick.
+
+
+
 
 
 ------------------------------------------------------------------------------------
@@ -580,6 +590,9 @@ If Enabled it will also check the status on a Guid against the database.
 Again this will only work if you have a valid user account..
 If you see a file called "Reporting_Failures.log", this is a a fallback file if the host is down or unavailable for some reason.
 Do not mess with this file, it will be auto deleted when the bans get uploaded..
+
+
+
 
 
 ------------------------------------------------------------------------------------
@@ -613,6 +626,9 @@ Global = 10
 
 So if you don’t need any channels to be restricted. you can delete the hole block [ChatRestriction]
 Note: This is will not use the Warnings Parameter for its counter.
+
+
+
 
 
 ------------------------------------------------------------------------------------
@@ -661,6 +677,10 @@ Commander_Time_Upper	= 10
 Direct 					= 0
 Direct_Time_Lower 		= 3
 Direct_Time_Upper 		= 10
+
+
+
+
 
 
  ____________________________________________________________________________________
@@ -729,6 +749,9 @@ Temp Admins may never execute any kick or ban commands on a perm admin.
 
 
 
+
+
+
 ------------------------------------------------------------------------------------
 * Plugins System *
 ------------------------------------------------------------------------------------
@@ -744,7 +767,7 @@ First step is to create a new directory called Plugins in the root of your Bec i
 Next, place your Bec plugin inside the Plugins directory: ( X:\Path\Bec\Plugins\MyPlugin )
 
 Example. lets use the ConnectionLimiter as an example. found at www.ibattle.org on the download page
-you should end up with something like.
+You should end up with something like.
 
 X:\Path\Bec\Plugins\ConnectionLimiter
 X:\Path\Bec\Plugins\ConnectionLimiter\__init__.py
@@ -752,6 +775,10 @@ X:\Path\Bec\Plugins\ConnectionLimiter\ReadMe.txt
 
 Thats Basicly it. Next step is to Read the ReadMe file the plugin has. some plugins uses a settings file.. 
 So make sure to read the file before starting Bec.
+
+
+
+
 
 
 ------------------------------------------------------------------------------------
